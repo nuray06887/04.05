@@ -60,33 +60,44 @@
 
 <div class="grid">
   <div class="box" aria-live="polite">
-    <div class="label">polite</div>
+    <div class="label">число (polite)</div>
     <div id="polite" class="value">0</div>
   </div>
 
   <div class="box" aria-live="assertive">
-    <div class="label">assertive</div>
-    <div id="assertive" class="value">0</div>
+    <div class="label">буква (assertive)</div>
+    <div id="assertive" class="value">A</div>
   </div>
 
   <div class="box" aria-live="off">
-    <div class="label">off</div>
-    <div id="off" class="value">0</div>
+    <div class="label">слово (off)</div>
+    <div id="off" class="value">привет</div>
   </div>
 </div>
 
 <script>
   let interval;
 
+  const words = ["привет", "мир", "код", "дока", "aria", "сайт"];
+
+  function randomLetter() {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+
+  function randomWord() {
+    return words[Math.floor(Math.random() * words.length)];
+  }
+
   function start() {
     if (interval) return;
 
     interval = setInterval(() => {
-      const random = Math.floor(Math.random() * 100);
+      const number = Math.floor(Math.random() * 100);
 
-      document.getElementById("polite").textContent = random;
-      document.getElementById("assertive").textContent = random;
-      document.getElementById("off").textContent = random;
+      document.getElementById("polite").textContent = number;
+      document.getElementById("assertive").textContent = randomLetter();
+      document.getElementById("off").textContent = randomWord();
     }, 2000);
   }
 
