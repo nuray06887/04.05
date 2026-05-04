@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>ARIA live demo</title>
+  <style>
+    body {
+      background: #0f1115;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      gap: 20px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .start { background: #2dd4bf; }
+    .stop { background: #fda4af; }
+
+    .grid {
+      display: flex;
+      gap: 20px;
+    }
+
+    .box {
+      border: 1px solid #555;
+      padding: 20px;
+      width: 120px;
+      text-align: center;
+    }
+
+    .label {
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 20px;
+      color: #fda4af;
+    }
+  </style>
+</head>
+<body>
+
+<div class="buttons">
+  <button class="start" onclick="start()">Оживить</button>
+  <button class="stop" onclick="stop()">Остановить</button>
+</div>
+
+<div class="grid">
+  <div class="box" aria-live="polite">
+    <div class="label">polite</div>
+    <div id="polite" class="value">0</div>
+  </div>
+
+  <div class="box" aria-live="assertive">
+    <div class="label">assertive</div>
+    <div id="assertive" class="value">0</div>
+  </div>
+
+  <div class="box" aria-live="off">
+    <div class="label">off</div>
+    <div id="off" class="value">0</div>
+  </div>
+</div>
+
+<script>
+  let interval;
+
+  function start() {
+    if (interval) return;
+
+    interval = setInterval(() => {
+      const random = Math.floor(Math.random() * 100);
+
+      document.getElementById("polite").textContent = random;
+      document.getElementById("assertive").textContent = random;
+      document.getElementById("off").textContent = random;
+    }, 2000);
+  }
+
+  function stop() {
+    clearInterval(interval);
+    interval = null;
+  }
+</script>
+
+</body>
+</html>
